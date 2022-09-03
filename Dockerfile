@@ -1,11 +1,16 @@
-FROM node:v16-alpine AS base
+FROM node:16.17.0-alpine AS base
 WORKDIR /home/app
 
 FROM base AS dependencies
 COPY package.json package.json
 RUN yarn
 
-FROM base AS development
+FROM base AS config
+ARG PORT=3000
+EXPOSE ${PORT}
+ENV PORT ${PORT}
+
+FROM config AS development
+COPY --from=dependencies /home/app/node_modules node_modules
 COPY . .
-COPY --from=dependencies node_modules node_modules
 CMD ["yarn", "start:dev"]

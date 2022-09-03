@@ -1,0 +1,12 @@
+.git
+.vscode
+dist
+node_modules
+.eslintcache
+.eslintrc.js
+.gitignore
+.prettierignore
+.prettierrc
+README.md
+yarn-*
+Dockerfile
